@@ -5,6 +5,7 @@ import Link from "next/link";
 import { useRouter } from "next/navigation";
 import apiRequest from "@/lib/api";
 import { useAuth } from "@/context/AuthContext";
+import AuthLayout from "@/components/AuthLayout";
 
 const DASHBOARD_BY_ROLE = {
   SHIPPER: "/dashboard/shipper",
@@ -46,16 +47,17 @@ export default function RegisterPage() {
   }
 
   return (
-    <main className="max-w-md mx-auto mt-16 p-6 bg-white rounded-lg shadow">
-      <h1 className="text-2xl font-semibold mb-6">Create an account</h1>
-
-      <form onSubmit={handleSubmit} className="space-y-4">
+    <AuthLayout
+      title="Create an account"
+      subtitle="Register as a shipper or a forwarder."
+    >
+      <form onSubmit={handleSubmit} className="space-y-5">
         <div>
-          <label className="block text-sm font-medium mb-1">
-            Company / Organization name
+          <label className="block text-sm font-medium text-ink mb-1.5">
+            Company / organization name
           </label>
           <input
-            className="w-full border rounded px-3 py-2"
+            className="w-full border border-slate/30 rounded px-3 py-2.5 bg-white text-ink focus-visible:border-cargo"
             value={form.tenantName}
             onChange={(e) => update("tenantName", e.target.value)}
             required
@@ -63,9 +65,11 @@ export default function RegisterPage() {
         </div>
 
         <div>
-          <label className="block text-sm font-medium mb-1">Account type</label>
+          <label className="block text-sm font-medium text-ink mb-1.5">
+            Account type
+          </label>
           <select
-            className="w-full border rounded px-3 py-2"
+            className="w-full border border-slate/30 rounded px-3 py-2.5 bg-white text-ink focus-visible:border-cargo"
             value={form.tenantType}
             onChange={(e) => update("tenantType", e.target.value)}
           >
@@ -75,10 +79,12 @@ export default function RegisterPage() {
         </div>
 
         <div>
-          <label className="block text-sm font-medium mb-1">Email</label>
+          <label className="block text-sm font-medium text-ink mb-1.5">
+            Email
+          </label>
           <input
             type="email"
-            className="w-full border rounded px-3 py-2"
+            className="w-full border border-slate/30 rounded px-3 py-2.5 bg-white text-ink focus-visible:border-cargo"
             value={form.email}
             onChange={(e) => update("email", e.target.value)}
             required
@@ -86,10 +92,12 @@ export default function RegisterPage() {
         </div>
 
         <div>
-          <label className="block text-sm font-medium mb-1">Password</label>
+          <label className="block text-sm font-medium text-ink mb-1.5">
+            Password
+          </label>
           <input
             type="password"
-            className="w-full border rounded px-3 py-2"
+            className="w-full border border-slate/30 rounded px-3 py-2.5 bg-white text-ink focus-visible:border-cargo"
             value={form.password}
             onChange={(e) => update("password", e.target.value)}
             required
@@ -101,18 +109,18 @@ export default function RegisterPage() {
         <button
           type="submit"
           disabled={submitting}
-          className="w-full bg-blue-600 text-white rounded py-2 font-medium disabled:opacity-50"
+          className="w-full bg-cargo hover:bg-cargo/90 text-white rounded py-2.5 font-medium transition-colors disabled:opacity-50"
         >
-          {submitting ? "Creating account..." : "Register"}
+          {submitting ? "Creating account…" : "Register"}
         </button>
       </form>
 
-      <p className="text-sm text-gray-500 mt-4">
+      <p className="text-sm text-slate mt-6">
         Already have an account?{" "}
-        <Link href="/login" className="text-blue-600">
+        <Link href="/login" className="text-cargo font-medium">
           Log in
         </Link>
       </p>
-    </main>
+    </AuthLayout>
   );
 }
